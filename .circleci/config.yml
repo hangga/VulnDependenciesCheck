@@ -24,6 +24,16 @@ jobs:
             - ~/.gradle/caches
       - store_artifacts:
           path: build/reports
+
+  vulnerable-dependencies-scan:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+      - run:
+          name: Scanning for Vulnerable Dependencies
+          command: ./gradlew ossIndexAudit
+
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -37,6 +47,7 @@ workflows:
   build-and-test:
     jobs:
       - test-java
+      - vulnerable-dependencies-scan
     # - deploy:
     #     requires:
     #       - test-java
