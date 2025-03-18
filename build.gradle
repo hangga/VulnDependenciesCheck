@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'org.sonatype.gradle.plugins.scan' version '2.8.3' // using sonatype
+}
+
+group = 'io.github.hangga'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation 'org.apache.struts:struts2-core:2.5.10'
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation 'com.google.guava:guava:24.1.1-jre'
+}
+
+test {
+    useJUnitPlatform()
+}
